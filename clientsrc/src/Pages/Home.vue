@@ -1,29 +1,39 @@
 <template>
-  <div class="home">
-    <h1>Current Bugs</h1>
+  <div class="home container">
+    <div class="row mt-3 mb-1">
+      <div class="col-12">
+        <h2>Reported Bugs</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-10 mx-auto">
+        <BugTable />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import ReportBug from "../components/reportbug";
+import Bug from "../components/bug";
+import BugTable from "../components/bugtable";
 export default {
-  name: "home"
-  //   deletePrompt() {
-  //     this.$swal
-  //       .fire({
-  //         title: "Are you sure?",
-  //         text: "You won't be able to revert this!",
-  //         icon: "warning",
-  //         showCancelButton: true,
-  //         confirmButtonColor: "#3085d6",
-  //         cancelButtonColor: "#d33",
-  //         confirmButtonText: "Yes, delete it!"
-  //       })
-  //       .then(result => {
-  //         if (result.value) {
-  //           Swal.fire("Deleted!", "Your file has been deleted.", "success");
-  //         }
-  //       });
-  //   }
-  // }
+  name: "home",
+  computed: {
+    profile() {
+      return this.$store.state.profile;
+    },
+    bugs() {
+      return this.$store.state.bugs;
+    }
+  },
+  mounted() {
+    this.$store.dispatch("getBugs");
+  },
+  components: {
+    ReportBug,
+    Bug,
+    BugTable
+  }
 };
 </script>

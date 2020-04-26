@@ -33,8 +33,14 @@
       </ul>
       <span class="navbar-text">
         <button class="btn btn-success" @click="login" v-if="!$auth.isAuthenticated">Login</button>
-        <button class="btn btn-danger" @click="logout" v-else>logout</button>
+        <div v-else>
+          <button class="btn btn-warning mr-2" data-toggle="modal" data-target="#reportModal">Report</button>
+          <button class="btn btn-danger" @click="logout">Logout</button>
+        </div>
       </span>
+      <Modal id="reportModal" title="Report a Bug">
+        <ReportBug :userName="profile.nickname"></ReportBug>
+      </Modal>
     </div>
   </nav>
 </template>
@@ -42,6 +48,8 @@
 <script>
 import axios from "axios";
 import { getUserData } from "@bcwdev/auth0-vue";
+import Modal from "../components/modal";
+import ReportBug from "../components/reportbug";
 export default {
   name: "Navbar",
   methods: {
@@ -56,6 +64,15 @@ export default {
       this.$store.dispatch("resetBearer");
       await this.$auth.logout({ returnTo: window.location.origin });
     }
+  },
+  computed: {
+    profile() {
+      return this.$auth.user;
+    }
+  },
+  components: {
+    Modal,
+    ReportBug
   }
 };
 </script>

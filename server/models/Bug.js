@@ -5,9 +5,9 @@ const Schema = mongoose.Schema;
 const Bug = new Schema(
   {
     closed: { type: Boolean, required: true, default: false },
-    modifiedDate: { type: Date },
+    modifiedDate: { type: String },
     title: { type: String, required: true },
-    importance: { type: String, enum: ["High", "Medium", "Low"] },
+    importance: { type: String, required: true, enum: ["High", "Medium", "Low"] },
     description: { type: String, required: true },
     creatorEmail: { type: String, required: true }
   },
