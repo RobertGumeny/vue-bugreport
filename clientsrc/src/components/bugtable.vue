@@ -78,7 +78,8 @@ export default {
       return this.$store.state.bugs;
     }
   },
-  mounted() {
+  async mounted() {
+    await this.$store.dispatch("getBugs");
     this.display = this.bugs;
   },
   methods: {
@@ -115,5 +116,10 @@ export default {
 .dropdown {
   margin-bottom: -7px;
   margin-left: -12px;
+}
+.bugTable {
+  height: 60vh;
+  overflow-y: scroll;
+  overflow-x: scroll;
 }
 </style>

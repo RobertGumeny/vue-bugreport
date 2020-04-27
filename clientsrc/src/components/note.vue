@@ -2,7 +2,7 @@
   <tr class="note">
     <th scope="row">{{noteData.creatorName}}</th>
     <td>{{noteData.content}}</td>
-    <td v-if="noteData.creatorEmail == this.$auth.user.email">
+    <td v-if="noteData.creatorEmail == this.$auth.user.email && !bug.closed">
       <button class="btn ml-auto">
         <i class="fas fa-trash-alt text-danger" @click="deletePrompt()"></i>
       </button>
@@ -26,6 +26,9 @@ export default {
   computed: {
     user() {
       return this.$auth.user;
+    },
+    bug() {
+      return this.$store.state.activeBug;
     }
   },
   methods: {
