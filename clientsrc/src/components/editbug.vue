@@ -1,5 +1,5 @@
 <template>
-  <div class="reportBug">
+  <div class="editBug">
     <form>
       <div class="form-group">
         <div class="form-row">
@@ -9,7 +9,7 @@
               type="text"
               class="form-control"
               placeholder="Enter Bug title..."
-              v-model="newBug.title"
+              v-model="bug.title"
             />
           </div>
           <div class="col-md-6">
@@ -24,14 +24,14 @@
           class="form-control"
           rows="8"
           placeholder="Enter bug description here..."
-          v-model="newBug.description"
+          v-model="bug.description"
         />
       </div>
       <div class="form-group">
         <div class="form-row">
           <div class="col-md-6">
             <label for>Priority:</label>
-            <select class="custom-select" v-model="newBug.importance">
+            <select class="custom-select" v-model="bug.importance">
               <option selected>Select a priority</option>
               <option value="High" class="text-danger">High</option>
               <option value="Medium" class="text-warning">Medium</option>
@@ -43,43 +43,28 @@
       <button
         type="submit"
         data-dismiss="modal"
-        @click="reportBug()"
+        @click="editBug()"
         class="btn btn-sm btn-dark"
-      >Submit Bug</button>
+      >Edit Bug</button>
     </form>
   </div>
 </template>
 
-
 <script>
 export default {
-  name: "reportBug",
+  name: "editbug",
   props: ["userName"],
   data() {
-    return {
-      newBug: {}
-    };
+    return {};
   },
   computed: {
-    user() {
-      return this.$auth.user;
+    bug() {
+      return this.$store.state.activeBug;
     }
   },
   methods: {
-    async reportBug() {
-      let dateObj = new Date();
-      let month = dateObj.getMonth() + 1;
-      let day = dateObj.getDate();
-      let year = dateObj.getFullYear();
-      let newDate = month + "/" + day + "/" + year;
-      this.newBug.modifiedDate = newDate;
-      this.newBug.creatorEmail = this.user.email;
-      await this.$store.dispatch("reportBug", this.newBug);
-      this.$router.push({
-        name: "bug",
-        params: { bugId: this.$store.state.activeBug.id }
-      });
-      this.newBug = {};
+    editBug() {
+      this.$store.dispatch("editBug", this.bug);
     }
   },
   components: {}

@@ -1,10 +1,10 @@
 <template>
-  <tr>
+  <tr @click="openBug()">
     <th scope="row">{{bugData.title}}</th>
     <td>{{bugData.creatorEmail}}</td>
     <td>{{bugData.importance}}</td>
-    <td v-if="bugData.closed">Closed</td>
-    <td v-else>Open</td>
+    <td v-if="bugData.closed" class="text-danger">Closed</td>
+    <td v-else class="text-success">Open</td>
     <td>{{bugData.modifiedDate}}</td>
   </tr>
 </template>
@@ -18,7 +18,15 @@ export default {
     return {};
   },
   computed: {},
-  methods: {},
+  methods: {
+    openBug() {
+      this.$store.commit("setActiveBug", {});
+      this.$router.push({
+        name: "bug",
+        params: { bugId: this.bugData.id }
+      });
+    }
+  },
   components: {}
 };
 </script>
