@@ -1,15 +1,15 @@
 <template>
   <div class="bugTable">
-    <div class="table-responsive">
+    <div class="table-responsive border border-secondary">
       <table class="table table-striped">
-        <thead class="thead-light">
+        <thead class="thead-dark">
           <tr class="table-primary">
             <th scope="col">Title</th>
             <th scope="col">Reported By</th>
             <th scope="col">
               <div class="dropdown">
                 <button
-                  class="btn dropdown-toggle font-weight-bold text-dark mb-0"
+                  class="btn dropdown-toggle font-weight-bold text-light mb-0"
                   type="button"
                   data-toggle="dropdown"
                   id="priorityFilterMenu"
@@ -34,7 +34,7 @@
             <th scope="col">
               <div class="dropdown">
                 <button
-                  class="btn dropdown-toggle font-weight-bold text-dark mb-0"
+                  class="btn dropdown-toggle font-weight-bold text-light mb-0"
                   type="button"
                   data-toggle="dropdown"
                   id="statusFilterMenu"

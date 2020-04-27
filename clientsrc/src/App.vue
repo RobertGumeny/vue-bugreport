@@ -18,8 +18,8 @@ export default {
     }
   },
   components: {
-    Navbar,
-  },
+    Navbar
+  }
 };
 </script>
 
@@ -27,4 +27,9 @@ export default {
 @import "./assets/_variables.scss";
 @import "bootstrap";
 @import "./assets/_overrides.scss";
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap");
+
+body {
+  font-family: "Roboto Slab", serif;
+}
 </style>

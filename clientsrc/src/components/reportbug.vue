@@ -32,7 +32,7 @@
           <div class="col-md-6">
             <label for>Priority:</label>
             <select class="custom-select" v-model="newBug.importance">
-              <option selected>Select a priority</option>
+              <option disabled selected>Select a priority</option>
               <option value="High" class="text-danger">High</option>
               <option value="Medium" class="text-warning">Medium</option>
               <option value="Low" class="text-success">Low</option>

@@ -2,7 +2,7 @@
   <div class="noteTable">
     <div class="table-responsive">
       <table class="table table-striped">
-        <thead class="thead-light">
+        <thead class="thead-dark">
           <tr class="table-primary">
             <th scope="col">Author</th>
             <th scope="col">Message</th>

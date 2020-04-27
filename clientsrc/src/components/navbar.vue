@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <router-link class="navbar-brand" :to="{ name: 'Home' }">
       Bug
       <i class="fas fa-bug pl-0"></i>
@@ -34,7 +34,11 @@
       <span class="navbar-text">
         <button class="btn btn-success" @click="login" v-if="!$auth.isAuthenticated">Login</button>
         <div v-else>
-          <button class="btn btn-warning mr-2" data-toggle="modal" data-target="#reportModal">Report</button>
+          <button
+            class="btn btn-secondary mr-2"
+            data-toggle="modal"
+            data-target="#reportModal"
+          >Report</button>
           <button class="btn btn-danger" @click="logout">Logout</button>
         </div>
       </span>

@@ -2,6 +2,7 @@
   <div class="bugDetails container-fluid">
     <div class="row my-2">
       <div class="col-12">
+        <span>Bug title:</span>
         <h2>{{bug.title}}</h2>
       </div>
     </div>
@@ -12,17 +13,25 @@
       </div>
       <div class="col-3 text-center">
         <span>Importance:</span>
-        <h5>{{bug.importance}}</h5>
+        <h5 class="text-danger" v-if="bug.importance == 'High'">{{bug.importance}}</h5>
+        <h5 class="text-warning" v-if="bug.importance == 'Medium'">{{bug.importance}}</h5>
+        <h5 class="text-success" v-if="bug.importance == 'Low'">{{bug.importance}}</h5>
       </div>
       <div class="col-3 text-right">
         <span>Status:</span>
-        <h5 v-if="bug.closed" class="text-danger">Closed</h5>
-        <h5 v-else class="text-success">Open</h5>
+        <h5 v-if="bug.closed" class="font-italic text-muted">
+          Closed
+          <i class="fas fa-lock"></i>
+        </h5>
+        <h5 v-else class="font-weight-bold">
+          Open
+          <i class="fas fa-lock-open"></i>
+        </h5>
       </div>
     </div>
     <div class="row">
-      <div class="col-10 mx-auto">
-        <p class="border">{{bug.description}}</p>
+      <div class="col-11 mx-auto">
+        <p class="border border-secondary p-1">{{bug.description}}</p>
       </div>
     </div>
     <div class="row">
@@ -31,7 +40,7 @@
         v-if="!bug.closed && bug.creatorEmail == this.$auth.user.email"
       >
         <button
-          class="btn btn-warning mr-2"
+          class="btn btn-warning text-white mr-2"
           @click="triggerEditBug()"
           data-toggle="modal"
           data-target="#editBugModal"
@@ -49,7 +58,7 @@
       </div>
     </div>
     <div class="row my-2">
-      <div class="col-12">
+      <div class="col-10 mx-auto">
         <span>
           <h2 class="d-inline">Notes</h2>
           <button
@@ -69,7 +78,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-11 mx-auto">
+      <div class="col-10 mx-auto">
         <NoteTable />
       </div>
     </div>
