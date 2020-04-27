@@ -79,7 +79,7 @@ export default {
     }
   },
   mounted() {
-    this.priorityAll();
+    this.display = this.bugs;
   },
   methods: {
     priorityAll() {
