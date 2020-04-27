@@ -16,7 +16,7 @@ export class BugsController extends BaseController {
       //NOTE Do we need a route to get bugs by flag, or can that be done on the front end?
       .post("", this.createBug)
       .put("/:id", this.editBug)
-      .delete("/:id", this.closeBug)
+
   }
   // SECTION Get requests
   async getAllBugs(req, res, next) {
@@ -64,17 +64,6 @@ export class BugsController extends BaseController {
     try {
       let data = await bugsService.edit(req.params.id, req.userInfo.email, req.body)
       return res.send(data)
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  //!SECTION
-  //SECTION Soft delete bug
-
-  async closeBug(req, res, next) {
-    try {
-      await bugsService.closeBug(req.params.id, req.userInfo.email, req.body)
     } catch (error) {
       next(error)
     }

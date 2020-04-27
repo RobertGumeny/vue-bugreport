@@ -11,7 +11,7 @@ let baseUrl = location.host.includes("localhost")
 
 let api = Axios.create({
   baseURL: baseUrl + "api/",
-  timeout: 3000,
+  timeout: 6000,
   withCredentials: true
 });
 
@@ -32,6 +32,9 @@ export default new Vuex.Store({
     },
     setActiveBug(state, bug) {
       state.activeBug = bug
+    },
+    setActiveNotes(state, notes) {
+      state.notes = notes
     }
   },
   actions: {
@@ -70,6 +73,14 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+    async getNotesByBugId({ commit, dispatch }, bugId) {
+      try {
+        let res = await api.get("bugs/" + bugId + "/notes")
+        commit("setActiveNotes", res.data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
     //!SECTION
 
     //SECTION Post requests
@@ -82,6 +93,14 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+    async createNote({ commit, dispatch }, noteData) {
+      try {
+        await api.post("notes", noteData)
+        dispatch("getNotesByBugId", noteData.bugId)
+      } catch (error) {
+        console.error(error)
+      }
+    },
     //!SECTION
     //SECTION Put requests
     async editBug({ commit, dispatch }, bugData) {
@@ -90,10 +109,29 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error)
       }
-    }
+    },
     //!SECTION
-    //SECTION Delete requests
+    //SECTION Delete requests/close bug
+    async closeBug({ commit, dispatch }, bugData) {
+      try {
+        console.log("deleting", bugData)
+        await api.put("bugs/" + bugData._id, {
+          closed: bugData.closed
+        })
+        dispatch("getBugById", bugData._id)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async deleteNote({ commit, dispatch }, noteData) {
+      try {
+        await api.delete("notes/" + noteData.id)
+        dispatch("getNotesByBugId", noteData.bugId)
 
+      } catch (error) {
+        console.error(error)
+      }
+    }
     //!SECTION
   }
 });
