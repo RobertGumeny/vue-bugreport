@@ -64,6 +64,12 @@ export default {
   },
   methods: {
     editBug() {
+      let dateObj = new Date();
+      let month = dateObj.getMonth() + 1;
+      let day = dateObj.getDate();
+      let year = dateObj.getFullYear();
+      let newDate = month + "/" + day + "/" + year;
+      this.bug.modifiedDate = newDate;
       this.$store.dispatch("editBug", this.bug);
     }
   },
